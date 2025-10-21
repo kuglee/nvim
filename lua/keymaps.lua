@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>w", vim.cmd.wa, { desc = "Save Changes" })
 vim.keymap.set("n", "<C-s>", vim.cmd.w, { desc = "Save Changes" })
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
-vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "Switch to the file explorer" })
+vim.keymap.set("n", "<leader>fe", "<CMD>Oil<CR>", { desc = "Switch to the file explorer" })
 
 -- search
 vim.keymap.set("n", "<esc>", vim.cmd.nohl)
