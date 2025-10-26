@@ -76,5 +76,6 @@ return {
 
     vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
     vim.keymap.set("n", "<leader>xp", "<cmd>XcodebuildSelectTestPlan<cr>", { desc = "Select Test Plan" })
+    vim.keymap.set("n", "<leader>xa", "<cmd>XcodebuildCancel<cr>", { desc = "Cancel currently running action" })
   end,
 }
