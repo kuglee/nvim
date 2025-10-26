@@ -47,8 +47,9 @@ return {
         end,
       },
       test_explorer = {
-        enabled = true, 
+        enabled = true,
         auto_open = true,
+        auto_focus = false,
       },
       code_coverage = {
         enabled = true,
@@ -75,6 +76,5 @@ return {
 
     vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
     vim.keymap.set("n", "<leader>xp", "<cmd>XcodebuildSelectTestPlan<cr>", { desc = "Select Test Plan" })
-    vim.keymap.set("n", "<leader>xq", "<cmd>Telescope quickfix<cr>", { desc = "Show QuickFix List" })
   end,
 }
