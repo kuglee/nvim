@@ -1,6 +1,7 @@
 require "keymaps"
 require "options"
 require "autocmd"
+require "breadcrumbs"
 -- DISABLED: using blink.cmp for prettier completion
 -- require "completion"
 
