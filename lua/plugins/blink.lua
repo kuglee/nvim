@@ -40,6 +40,17 @@ return {
       ["<C-c>"] = { "cancel", "fallback" },
       ["<C-j>"] = { "scroll_documentation_down" },
       ["<C-k>"] = { "scroll_documentation_up" },
+      ["<S-Enter>"] = {
+        function(cmp)
+          if not cmp.is_visible() then
+            return false -- Run fallback
+          end
+          cmp.select_next { auto_insert = true, count = 0 }
+          cmp.hide()
+          return true
+        end,
+        "fallback",
+      },
     },
     appearance = {
       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
