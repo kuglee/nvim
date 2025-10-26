@@ -1,9 +1,10 @@
 vim.g.mapleader = " "
 
 -- neovim
-vim.keymap.set("n", "<leader>w", vim.cmd.wa, { desc = "Save Changes" })
-vim.keymap.set("n", "<C-s>", vim.cmd.w, { desc = "Save Changes" })
-vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select All" })
+vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Save changes" })
+vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit window" })
+vim.keymap.set("n", "<C-s>", vim.cmd.w, { desc = "Save changes" })
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
 vim.keymap.set("n", "<leader>fe", "<CMD>Oil<CR>", { desc = "Switch to the file explorer" })
 
 -- search
