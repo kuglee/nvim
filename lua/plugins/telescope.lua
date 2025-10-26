@@ -22,6 +22,15 @@ return {
           ".xcodeproj",
           ".xcassets",
         },
+        layout_strategy = "vertical",
+        layout_config = {
+          vertical = {
+            mirror = true,
+            preview_height = 0.5,
+          },
+          height = 0.9,
+          width = 0.9,
+        },
       },
     }
 
@@ -30,5 +39,7 @@ return {
     vim.keymap.set("n", "<leader>fg", builtin.live_grep)
     vim.keymap.set("n", "<leader>fb", builtin.buffers)
     vim.keymap.set("n", "<leader>fd", builtin.diagnostics)
+    vim.keymap.set("n", "gd", builtin.lsp_definitions)
+    vim.keymap.set("n", "gr", builtin.lsp_references)
   end,
 }
