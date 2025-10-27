@@ -1,37 +1,47 @@
 -- based on: https://github.com/juniorsundar/nvim/blob/ec45d4572e99769278e26dee76c0830d3f68f414/lua/config/lsp/breadcrumbs.lua
 
 local folder_icon = "%#Conditional#" .. "󰉋" .. "%*"
-local file_icon = "󰈔"
+local file_icon = "%#None#" .. "󰈔" .. "%*"
 
 local SymbolKind = vim.lsp.protocol.SymbolKind
 local kind_icons = {
-  [SymbolKind.File] = "%#File#" .. "󰈔" .. "%*",
-  [SymbolKind.Module] = "%#Module#" .. "󰏗" .. "%*",
-  [SymbolKind.Namespace] = "%#Structure#" .. "󰅩" .. "%*",
-  [SymbolKind.Package] = "󰏗",
-  [SymbolKind.Class] = "%#Class#" .. "" .. "%*",
-  [SymbolKind.Method] = "%#Function#" .. "󰆧" .. "%*",
-  [SymbolKind.Property] = "%#Property#" .. "" .. "%*",
-  [SymbolKind.Field] = "%#Field#" .. "" .. "%*",
-  [SymbolKind.Constructor] = "%#Function#" .. "" .. "%*",
-  [SymbolKind.Enum] = "%#Enum#" .. "" .. "%*",
-  [SymbolKind.Interface] = "%#Type#" .. "" .. "%*",
-  [SymbolKind.Function] = "%#Function#" .. "󰊕" .. "%*",
-  [SymbolKind.Variable] = "%#None#" .. "󰀫" .. "%*",
-  [SymbolKind.Constant] = "%#Constant#" .. "󰏿" .. "%*",
-  [SymbolKind.String] = "%#String#" .. "" .. "%*",
-  [SymbolKind.Number] = "%#Number#" .. "󰎠" .. "%*",
-  [SymbolKind.Boolean] = "%#Boolean#" .. "" .. "%*",
-  [SymbolKind.Array] = "%#Array#" .. "󰅪" .. "%*",
-  [SymbolKind.Object] = "%#Class#" .. "󰅩" .. "%*",
-  [SymbolKind.Key] = "%#Keyword#" .. "󰌋" .. "%*",
-  [SymbolKind.Null] = "󰢤",
-  [SymbolKind.EnumMember] = "",
-  [SymbolKind.Struct] = "%#Structure#" .. "" .. "%*",
-  [SymbolKind.Event] = "",
-  [SymbolKind.Operator] = "",
-  [SymbolKind.TypeParameter] = "󰅲",
+  [SymbolKind.Array] = { color = "Operator", icon = "󰅪" },
+  [SymbolKind.Boolean] = { color = "Boolean", icon = "" },
+  [SymbolKind.Class] = { color = "Type", icon = "" },
+  [SymbolKind.Constant] = { color = "Constant", icon = "󰏿" },
+  [SymbolKind.Constructor] = { color = "Function", icon = "" },
+  [SymbolKind.Enum] = { color = "Constant", icon = "" },
+  [SymbolKind.EnumMember] = { color = "Constant", icon = "" },
+  [SymbolKind.Event] = { color = "None", icon = "" },
+  [SymbolKind.Field] = { color = "Field", icon = "" },
+  [SymbolKind.File] = { color = "File", icon = "󰈔" },
+  [SymbolKind.Function] = { color = "Function", icon = "󰊕" },
+  [SymbolKind.Interface] = { color = "Type", icon = "" },
+  [SymbolKind.Key] = { color = "Keyword", icon = "󰌋" },
+  [SymbolKind.Method] = { color = "Function", icon = "󰆧" },
+  [SymbolKind.Module] = { color = "Module", icon = "󰏗" },
+  [SymbolKind.Namespace] = { color = "Namespace", icon = "󰅩" },
+  [SymbolKind.Null] = { color = "Constant", icon = "󰢤" },
+  [SymbolKind.Number] = { color = "Number", icon = "󰎠" },
+  [SymbolKind.Object] = { color = "Statement", icon = "󰅩" },
+  [SymbolKind.Operator] = { color = "Operator", icon = "" },
+  [SymbolKind.Package] = { color = "Module", icon = "󰏗" },
+  [SymbolKind.Property] = { color = "Property", icon = "" },
+  [SymbolKind.String] = { color = "String", icon = "" },
+  [SymbolKind.Struct] = { color = "Structure", icon = "" },
+  [SymbolKind.TypeParameter] = { color = "None", icon = "󰅲" },
+  [SymbolKind.Variable] = { color = "None", icon = "󰀫" },
 }
+
+local function get_colored_kind_icon(kind)
+  local entry = kind_icons[kind]
+
+  if not entry then
+    return ""
+  end
+
+  return "%#" .. entry.color .. "#" .. entry.icon .. "%*"
+end
 
 local function range_contains_pos(range, line, char)
   local start = range.start
@@ -59,7 +69,7 @@ local function find_symbol_path(symbol_list, line, char, path)
 
   for _, symbol in ipairs(symbol_list) do
     if range_contains_pos(symbol.range, line, char) then
-      local icon = kind_icons[symbol.kind]
+      local icon = get_colored_kind_icon(symbol.kind)
       local prefix = (icon and icon ~= "") and (icon .. " ") or ""
       table.insert(path, prefix .. symbol.name)
       find_symbol_path(symbol.children, line, char, path)
