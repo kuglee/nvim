@@ -138,7 +138,14 @@ end
 
 local function breadcrumbs_set()
   local bufnr = vim.api.nvim_get_current_buf()
-  ---@type string
+  local clients = vim.lsp.get_clients { bufnr = bufnr }
+
+  if #clients == 0 then
+    return
+  elseif not clients[1]:supports_method "textDocument/documentSymbol" then
+    return
+  end
+
   local uri = vim.lsp.util.make_text_document_params(bufnr)["uri"]
   if not uri then
     vim.print "Error: Could not get URI for buffer. Is it saved?"
@@ -157,7 +164,12 @@ local function breadcrumbs_set()
     return
   end
 
-  vim.lsp.buf_request(bufnr, "textDocument/documentSymbol", params, lsp_callback)
+  local result, _ =
+    pcall(vim.lsp.buf_request, bufnr, "textDocument/documentSymbol", params, lsp_callback)
+
+  if not result then
+    return
+  end
 end
 
 local breadcrumbs_augroup = vim.api.nvim_create_augroup("Breadcrumbs", { clear = true })
