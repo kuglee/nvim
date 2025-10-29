@@ -1,36 +1,36 @@
 -- based on: https://github.com/juniorsundar/nvim/blob/ec45d4572e99769278e26dee76c0830d3f68f414/lua/config/lsp/breadcrumbs.lua
 
-local folder_icon = "%#Conditional#" .. "󰉋" .. "%*"
-local file_icon = "%#None#" .. "󰈔" .. "%*"
+local folder_icon = "%#Conditional#" .. "􀈖 " .. "%*"
+local file_icon = "%#None#" .. "􀉀 " .. "%*"
 
 local SymbolKind = vim.lsp.protocol.SymbolKind
 local kind_icons = {
-  [SymbolKind.Array] = { color = "Operator", icon = "󰅪" },
-  [SymbolKind.Boolean] = { color = "Boolean", icon = "" },
-  [SymbolKind.Class] = { color = "Type", icon = "" },
-  [SymbolKind.Constant] = { color = "Constant", icon = "󰏿" },
-  [SymbolKind.Constructor] = { color = "Function", icon = "" },
-  [SymbolKind.Enum] = { color = "Enum", icon = "" },
-  [SymbolKind.EnumMember] = { color = "Constant", icon = "" },
-  [SymbolKind.Event] = { color = "None", icon = "" },
-  [SymbolKind.Field] = { color = "Field", icon = "" },
-  [SymbolKind.File] = { color = "File", icon = "󰈔" },
-  [SymbolKind.Function] = { color = "Function", icon = "󰊕" },
-  [SymbolKind.Interface] = { color = "Type", icon = "" },
-  [SymbolKind.Key] = { color = "Keyword", icon = "󰌋" },
-  [SymbolKind.Method] = { color = "Function", icon = "󰆧" },
-  [SymbolKind.Module] = { color = "Module", icon = "󰏗" },
-  [SymbolKind.Namespace] = { color = "Structure", icon = "󰅩" },
-  [SymbolKind.Null] = { color = "Constant", icon = "󰢤" },
-  [SymbolKind.Number] = { color = "Number", icon = "󰎠" },
-  [SymbolKind.Object] = { color = "Statement", icon = "" },
-  [SymbolKind.Operator] = { color = "Operator", icon = "" },
-  [SymbolKind.Package] = { color = "Module", icon = "󰏗" },
-  [SymbolKind.Property] = { color = "Property", icon = "" },
-  [SymbolKind.String] = { color = "String", icon = "" },
-  [SymbolKind.Struct] = { color = "Structure", icon = "" },
-  [SymbolKind.TypeParameter] = { color = "None", icon = "󰅲" },
-  [SymbolKind.Variable] = { color = "None", icon = "󰀫" },
+  [SymbolKind.Array] = { color = "Operator", icon = "􀠩 " },
+  [SymbolKind.Boolean] = { color = "Boolean", icon = "􁁣 " },
+  [SymbolKind.Class] = { color = "Type", icon = "􀂙 " },
+  [SymbolKind.Constant] = { color = "Constant", icon = "􀀉 " },
+  [SymbolKind.Constructor] = { color = "Function", icon = "􀣌 " },
+  [SymbolKind.Enum] = { color = "Enum", icon = "􀂝 " },
+  [SymbolKind.EnumMember] = { color = "Constant", icon = "􀀍 " },
+  [SymbolKind.Event] = { color = "None", icon = "􀼶 " },
+  [SymbolKind.Field] = { color = "Field", icon = "􀂟 " },
+  [SymbolKind.File] = { color = "File", icon = "􀉀 " },
+  [SymbolKind.Function] = { color = "Function", icon = "􀗢 " },
+  [SymbolKind.Interface] = { color = "Type", icon = "􀂥 " },
+  [SymbolKind.Key] = { color = "Keyword", icon = "􀟖 " },
+  [SymbolKind.Method] = { color = "Function", icon = "􀂭 " },
+  [SymbolKind.Module] = { color = "Module", icon = "􀐛 " },
+  [SymbolKind.Namespace] = { color = "Structure", icon = "􀂯 " },
+  [SymbolKind.Null] = { color = "Constant", icon = "􀓔 " },
+  [SymbolKind.Number] = { color = "Number", icon = "􀅱 " },
+  [SymbolKind.Object] = { color = "Statement", icon = "􀩶 " },
+  [SymbolKind.Operator] = { color = "Operator", icon = "􀅺 " },
+  [SymbolKind.Package] = { color = "Module", icon = "􀐛 " },
+  [SymbolKind.Property] = { color = "Property", icon = "􀂳 " },
+  [SymbolKind.String] = { color = "String", icon = "􂐦 " },
+  [SymbolKind.Struct] = { color = "Structure", icon = "􀂹 " },
+  [SymbolKind.TypeParameter] = { color = "None", icon = "􀸏 " },
+  [SymbolKind.Variable] = { color = "None", icon = "􀀯 " },
 }
 
 local function get_colored_kind_icon(kind)
