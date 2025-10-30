@@ -33,16 +33,3 @@ function Empty_message()
   end
 end
 vim.cmd [[autocmd CmdlineLeave * lua vim.defer_fn(Empty_message, 5000)]]
-
--- auto change theme
--- doesn't work in Ghostty
-vim.api.nvim_create_autocmd("OptionSet", {
-  pattern = "background",
-  callback = function()
-    if vim.o.background == "dark" then
-      vim.cmd "colorscheme xcodedark"
-    else
-      vim.cmd "colorscheme github_light"
-    end
-  end,
-})
