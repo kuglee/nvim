@@ -1,16 +1,7 @@
-return {
-  "projekt0n/github-nvim-theme",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("github-theme").setup {
-      options = {
-        styles = {
-          comments = "italic",
-        },
-      },
-    }
+vim.pack.add { "https://github.com/projekt0n/github-nvim-theme" }
 
-    vim.cmd "colorscheme github_dark_dimmed"
-  end,
+require("github-theme").setup {
+  styles = {
+    comments = { italic = true },
+  },
 }

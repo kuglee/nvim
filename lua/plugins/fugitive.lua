@@ -1,6 +1,1 @@
-return {
-  {
-    "tpope/vim-fugitive",
-    cmd = { "G", "Git", "Gstatus", "Gblame", "Gcommit" },
-  },
-}
+vim.pack.add { { src = "https://github.com/tpope/vim-fugitive" } }

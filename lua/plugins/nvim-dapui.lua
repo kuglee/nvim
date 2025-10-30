@@ -1,9 +1,14 @@
-return {
-  "rcarriga/nvim-dap-ui",
-  dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-  lazy = true,
-  config = function()
-    require("dapui").setup {
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  callback = function()
+    vim.pack.add {
+      "https://github.com/rcarriga/nvim-dap-ui",
+      "https://github.com/mfussenegger/nvim-dap",
+      "https://github.com/nvim-neotest/nvim-nio",
+    }
+
+    local dapui = require "dapui"
+
+    dapui.setup {
       controls = {
         element = "console",
         enabled = true,
@@ -52,18 +57,12 @@ return {
       },
     }
 
-    local dap, dapui = require "dap", require "dapui"
+    local dap = require "dap"
 
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      dapui.close()
-    end
+    dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+    dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+    dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
-    vim.keymap.set({ "n", "v" }, "<leader>du", require("dapui").toggle, { desc = "Toogle UI" })
+    vim.keymap.set({ "n", "v" }, "<leader>du", dapui.toggle, { desc = "Toogle UI" })
   end,
-}
+})

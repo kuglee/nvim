@@ -2,32 +2,23 @@ require "keymaps"
 require "options"
 require "autocmd"
 require "breadcrumbs"
--- DISABLED: using blink.cmp for prettier completion
--- require "completion"
-
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  }
-end
-
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-  { import = "plugins" },
-}, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
-})
+-- require "completion" -- DISABLED: using blink.cmp for prettier completion
+require "plugins.auto-session"
+require "plugins.blink"
+require "plugins.conform"
+require "plugins.fidget"
+require "plugins.fugitive"
+require "plugins.github-colorscheme"
+require "plugins.harpoon"
+require "plugins.indent-blankline"
+require "plugins.lualine"
+require "plugins.oil"
+require "plugins.nvim-dapui"
+require "plugins.nvim-treesitter"
+require "plugins.telescope"
+require "plugins.tiny-inline-diagnostic"
+require "plugins.trouble"
+require "plugins.undotree"
+require "plugins.nvim-dap"
+require "plugins.xcodebuild"
+require "plugins.xcodedark-colorscheme"

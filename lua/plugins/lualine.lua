@@ -1,7 +1,11 @@
-return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    vim.pack.add {
+      "https://github.com/nvim-lualine/lualine.nvim",
+      "https://github.com/nvim-tree/nvim-web-devicons",
+    }
+
     local function visual_selection_info()
       local mode = vim.fn.mode()
       if mode == "v" or mode == "V" or mode == "\22" then
@@ -86,7 +90,7 @@ return {
           { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = "#a6e3a1", bg = "#161622" } },
           {
             "vim.g.xcodebuild_platform == 'macOS' and '  macOS' or"
-            .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
+              .. " ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'",
             color = { fg = "#f9e2af", bg = "#161622" },
           },
         },
@@ -109,4 +113,4 @@ return {
       extensions = { "nvim-dap-ui", "quickfix", "trouble", "nvim-tree", "lazy", "mason" },
     }
   end,
-}
+})

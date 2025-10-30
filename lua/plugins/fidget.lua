@@ -1,7 +1,8 @@
-return {
-  "j-hui/fidget.nvim",
-  event = "VeryLazy",
-  config = function()
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    vim.pack.add { "https://github.com/j-hui/fidget.nvim" }
+
     local fidget = require "fidget"
     fidget.setup {
       notification = {
@@ -20,4 +21,4 @@ return {
       },
     }
   end,
-}
+})

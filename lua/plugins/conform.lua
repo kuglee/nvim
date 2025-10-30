@@ -1,7 +1,8 @@
-return {
-  "stevearc/conform.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  once = true,
+  callback = function()
+    vim.pack.add { "https://github.com/stevearc/conform.nvim" }
+
     local conform = require "conform"
 
     conform.setup {
@@ -22,12 +23,6 @@ return {
       },
     }
 
-    vim.keymap.set("n", "<leader>=", function()
-      conform.format {
-        lsp_fallback = false,
-        async = false,
-        timeout_ms = 500,
-      }
-    end, { desc = "Format file" })
+    vim.keymap.set("n", "<leader>=", conform.format, { desc = "Format file" })
   end,
-}
+})

@@ -1,8 +1,8 @@
-return {
-  "rachartier/tiny-inline-diagnostic.nvim",
-  event = "VeryLazy",
-  priority = 1000,
-  config = function()
+vim.pack.add { "https://github.com/rachartier/tiny-inline-diagnostic.nvim" }
+
+vim.api.nvim_create_autocmd("UIEnter", {
+  once = true,
+  callback = function()
     require("tiny-inline-diagnostic").setup {
       options = {
         multiple_diag_under_cursor = true,
@@ -18,4 +18,4 @@ return {
     }
     vim.diagnostic.config { virtual_text = false } -- Disable default virtual text
   end,
-}
+})
