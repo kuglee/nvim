@@ -1,12 +1,15 @@
 local progress_handle
 
-return {
-  "wojciech-kulik/xcodebuild.nvim",
-  dependencies = {
-    "nvim-telescope/telescope.nvim",
-    "MunifTanjim/nui.nvim",
-  },
-  config = function()
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  once = true,
+  callback = function()
+    vim.pack.add {
+      "https://github.com/wojciech-kulik/xcodebuild.nvim",
+      "https://github.com/nvim-telescope/telescope.nvim",
+      "https://github.com/MunifTanjim/nui.nvim",
+      "https://github.com/mfussenegger/nvim-dap",
+    }
+
     require("xcodebuild").setup {
       show_build_progress_bar = true,
       logs = {
@@ -77,5 +80,37 @@ return {
     vim.keymap.set("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
     vim.keymap.set("n", "<leader>xp", "<cmd>XcodebuildSelectTestPlan<cr>", { desc = "Select Test Plan" })
     vim.keymap.set("n", "<leader>xa", "<cmd>XcodebuildCancel<cr>", { desc = "Cancel currently running action" })
+    -- stylua: ignore end
+
+    -- DAP integration
+    local xcodebuild = require "xcodebuild.integrations.dap"
+    xcodebuild.setup()
+
+    local define = vim.fn.sign_define
+    define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
+    define(
+      "DapBreakpointRejected",
+      { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" }
+    )
+    define("DapStopped", { text = "", texthl = "DiagnosticOk", linehl = "", numhl = "" })
+    define("DapLogPoint", { text = "", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
+    define("DapLogPoint", { text = "", texthl = "DiagnosticInfo", linehl = "", numhl = "" })
+
+    --when breakpoint is hit, it sets the focus to the buffer with the breakpoint
+    require("dap").defaults.fallback.switchbuf = "usetab,uselast"
+
+    --stylua: ignore start
+    vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug, { desc = "Build & Debug" })
+    vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build, { desc = "Debug Without Building" })
+    vim.keymap.set("n", "<leader>dt", xcodebuild.debug_tests, { desc = "Debug Tests" })
+    vim.keymap.set("n", "<leader>dT", xcodebuild.debug_class_tests, { desc = "Debug Class Tests" })
+    vim.keymap.set("n", "<leader>b", xcodebuild.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<leader>B", xcodebuild.toggle_message_breakpoint, { desc = "Toggle Message Breakpoint" })
+    --stylua: ignore end
+
+    vim.keymap.set("n", "<leader>dx", function()
+      xcodebuild.terminate_session()
+      require("dap").listeners.after["event_terminated"]["me"]()
+    end, { desc = "Terminate debugger" })
   end,
-}
+})
