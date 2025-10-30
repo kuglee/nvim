@@ -57,6 +57,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- better diffs
+vim.opt.diffopt:append "algorithm:histogram"
+
 -- LSP activation (references lsp/<filename>)
 vim.lsp.enable {
   "luals",
