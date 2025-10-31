@@ -1,10 +1,7 @@
 vim.keymap.set("n", "<leader>u", function()
-  if not package.loaded["undotree"] then
-    vim.pack.add {
-      "https://github.com/jiaoshijie/undotree",
-      "https://github.com/nvim-lua/plenary.nvim",
-    }
-  end
+  vim.cmd "packadd nvim.undotree"
 
-  require("undotree").toggle()
+  require("undotree").open {
+    command = "botright 40vnew",
+  }
 end, { desc = "Toggle UndoTree" })

@@ -85,10 +85,6 @@
       "rev": "d7494d8",
       "src": "https://github.com/folke/trouble.nvim"
     },
-    "undotree": {
-      "rev": "1c3e753",
-      "src": "https://github.com/jiaoshijie/undotree"
-    },
     "vim-fugitive": {
       "rev": "61b51c0",
       "src": "https://github.com/tpope/vim-fugitive"
