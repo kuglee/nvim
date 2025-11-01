@@ -23,3 +23,24 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
     vim.defer_fn(clear_last_command_message, 5000)
   end,
 })
+
+-- sync colorscheme with background
+local function sync_colorscheme_with_background(dark_theme, light_theme)
+  local last_background = vim.o.background
+
+  vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "background",
+    callback = function()
+      if vim.o.background == last_background then
+        return
+      end
+      last_background = vim.o.background
+
+      vim.schedule(function()
+        vim.cmd.colorscheme((vim.o.background == "dark") and dark_theme or light_theme)
+      end)
+    end,
+  })
+end
+
+sync_colorscheme_with_background("xcodedark", "github_light")
