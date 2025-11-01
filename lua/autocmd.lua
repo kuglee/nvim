@@ -11,16 +11,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- clear last command message
-local function clear_last_command_message()
-  if vim.api.nvim_get_mode().mode ~= "c" then
-    vim.api.nvim_echo({ { "" } }, false, {})
-  end
-end
-
 vim.api.nvim_create_autocmd("CmdlineLeave", {
   pattern = "*",
   callback = function()
-    vim.defer_fn(clear_last_command_message, 5000)
+    vim.defer_fn(function()
+      if vim.api.nvim_get_mode().mode ~= "c" then
+        vim.api.nvim_echo({ { "" } }, false, {})
+      end
+    end, 5000)
   end,
 })
 
