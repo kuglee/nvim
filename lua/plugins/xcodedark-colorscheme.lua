@@ -8,6 +8,7 @@ require("xcodedark").setup {
 }
 
 local function apply_custom_styles()
+  vim.g.colors_name = "xcodedark"
   vim.opt.guicursor:append "a:blinkon0"
   vim.api.nvim_set_hl(0, "TelescopePreviewLine", { bg = "#636f83", bold = true })
 end
