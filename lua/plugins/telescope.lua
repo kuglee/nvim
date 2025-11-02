@@ -9,14 +9,14 @@ require("telescope").setup {
   defaults = {
     vimgrep_arguments = table.insert(conf.vimgrep_arguments, "--fixed-strings"),
     file_ignore_patterns = {
-      ".build",
-      ".git",
-      ".idea",
-      ".nvim",
-      ".swiftpm",
-      ".vscode",
-      ".xcodeproj",
-      ".xcassets",
+      "^%.build/",
+      "^%.git/",
+      "^%.idea/",
+      "^%.nvim/",
+      "^%.swiftpm/",
+      "^%.vscode/",
+      "^%.xcodeproj/",
+      "^%.xcassets/",
     },
     layout_strategy = "vertical",
     layout_config = {
