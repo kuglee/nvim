@@ -11,10 +11,6 @@ vim.keymap.set("n", "<leader>fe", "<CMD>Oil<CR>", { desc = "Switch to the file e
 vim.keymap.set("n", "<esc>", vim.cmd.nohl)
 vim.keymap.set("n", "/", "/\\V", { noremap = true })
 
--- new line in normal mode
-vim.keymap.set("n", "<CR>", "o<ESC>")
-vim.keymap.set("n", "<S-Enter>", "O<ESC>")
-
 -- navigate linewraps
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk", { silent = true })
