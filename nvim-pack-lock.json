@@ -16,10 +16,6 @@
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
-    "github-nvim-theme": {
-      "rev": "c106c94",
-      "src": "https://github.com/projekt0n/github-nvim-theme"
-    },
     "indent-blankline.nvim": {
       "rev": "005b560",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
@@ -45,12 +41,9 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "42fc28ba",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
-    },
-    "nvim-ts-autotag": {
-      "rev": "c4ca798",
-      "src": "https://github.com/windwp/nvim-ts-autotag"
+      "rev": "f46e3a09",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
     },
     "nvim-web-devicons": {
       "rev": "8dcb311",
@@ -72,6 +65,10 @@
       "rev": "994c13d",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
+    "tokyonight.nvim": {
+      "rev": "5da1b76",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    },
     "trouble.nvim": {
       "rev": "d7494d8",
       "src": "https://github.com/folke/trouble.nvim"
@@ -83,10 +80,6 @@
     "xcodebuild.nvim": {
       "rev": "7fc45eb",
       "src": "https://github.com/wojciech-kulik/xcodebuild.nvim"
-    },
-    "xcodedark.nvim": {
-      "rev": "673ed37",
-      "src": "https://github.com/V4N1LLA-1CE/xcodedark.nvim"
     }
   }
 }
