@@ -20,18 +20,9 @@
       "rev": "c106c94",
       "src": "https://github.com/projekt0n/github-nvim-theme"
     },
-    "harpoon": {
-      "rev": "1bc17e3",
-      "src": "https://github.com/ThePrimeagen/harpoon",
-      "version": "'harpoon2'"
-    },
     "indent-blankline.nvim": {
       "rev": "005b560",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
-    },
-    "lualine.nvim": {
-      "rev": "3946f01",
-      "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.icons": {
       "rev": "2847986",
