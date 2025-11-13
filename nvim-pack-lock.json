@@ -8,10 +8,6 @@
       "rev": "afc4f4d",
       "src": "https://github.com/saghen/blink.cmp"
     },
-    "conform.nvim": {
-      "rev": "9fd3d5e",
-      "src": "https://github.com/stevearc/conform.nvim"
-    },
     "fidget.nvim": {
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
