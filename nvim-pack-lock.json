@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "auto-session": {
-      "rev": "f0eb3d6",
-      "src": "https://github.com/rmagatti/auto-session"
-    },
     "blink.cmp": {
       "rev": "afc4f4d",
       "src": "https://github.com/saghen/blink.cmp"
