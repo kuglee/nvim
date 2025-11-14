@@ -36,5 +36,8 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
         vim.keymap.del({ "n", "v" }, "<Leader>de")
       end
     end
+
+    --when breakpoint is hit, it sets the focus to the buffer with the breakpoint
+    dap.defaults.fallback.switchbuf = "usetab,uselast"
   end,
 })
