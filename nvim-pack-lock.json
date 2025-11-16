@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "afc4f4d",
+      "rev": "b19413d",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "fidget.nvim": {
@@ -13,7 +13,7 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "mini.icons": {
-      "rev": "2847986",
+      "rev": "ff2e4f1",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "nui.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-dap": {
-      "rev": "6782b09",
+      "rev": "b38f7d3",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-dap-ui": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "f46e3a09",
+      "rev": "0cfa5994",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -50,11 +50,11 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "telescope.nvim": {
-      "rev": "b4da76b",
+      "rev": "a0bbec2",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "994c13d",
+      "rev": "71f9986",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "tokyonight.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "trouble.nvim": {
-      "rev": "d7494d8",
+      "rev": "bd67efe",
       "src": "https://github.com/folke/trouble.nvim"
     },
     "vim-fugitive": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "xcodebuild.nvim": {
-      "rev": "7fc45eb",
+      "rev": "c6b573d",
       "src": "https://github.com/wojciech-kulik/xcodebuild.nvim"
     }
   }
