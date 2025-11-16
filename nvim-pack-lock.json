@@ -8,6 +8,10 @@
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
+    "indent-blankline.nvim": {
+      "rev": "005b560",
+      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
     "mini.icons": {
       "rev": "2847986",
       "src": "https://github.com/nvim-mini/mini.icons"
