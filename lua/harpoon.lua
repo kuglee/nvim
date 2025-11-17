@@ -90,7 +90,7 @@ local function open_slot(n)
   vim.cmd.edit(vim.fn.fnameescape(entry.file))
 
   if entry.row and entry.col then
-    vim.api.nvim_win_set_cursor(0, { entry.row, entry.col })
+    pcall(vim.api.nvim_win_set_cursor, 0, { entry.row, entry.col })
   end
 end
 
