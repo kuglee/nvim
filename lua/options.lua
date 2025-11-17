@@ -49,6 +49,7 @@ vim.opt.showmatch = true -- show matching brackets
 vim.opt.showmode = false -- don't show editing mode
 vim.opt.showcmd = false -- don't show last (partial) command
 vim.opt.updatetime = 50
+vim.opt.laststatus = 3 -- global statusline
 
 -- commenting
 vim.api.nvim_create_autocmd("BufEnter", {
