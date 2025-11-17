@@ -280,3 +280,26 @@ vim.api.nvim_create_autocmd("DirChanged", {
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = save_slots,
 })
+
+-- Auto-update cursor position when leaving a buffer
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function()
+    local file = vim.api.nvim_buf_get_name(0)
+    if file == "" or file:match "^argslots://" then
+      return
+    end
+
+    file = vim.fn.fnamemodify(file, ":p")
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local slots = get_slots()
+
+    for i, entry in ipairs(slots) do
+      if entry.file and vim.fn.fnamemodify(entry.file, ":p") == file then
+        slots[i] = { file = file, row = cursor[1], col = cursor[2] }
+        set_slots(slots)
+        save_slots()
+        break
+      end
+    end
+  end,
+})
