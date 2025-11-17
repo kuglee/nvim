@@ -272,8 +272,36 @@ local function diagnostic_info(current_hl)
   return #parts > 0 and table.concat(parts, " ") .. " " or ""
 end
 
+function Selectioncount()
+  local mode = vim.fn.mode(true)
+  local line_start, col_start = vim.fn.line "v", vim.fn.col "v"
+  local line_end, col_end = vim.fn.line ".", vim.fn.col "."
+  local lines = 1
+  local chars = 0
+
+  if mode == "v" or mode == "V" or mode == "" then
+    if mode:match "" then
+      lines = math.abs(line_start - line_end) + 1
+      chars = math.abs(col_start - col_end) + 1
+    elseif mode:match "V" or line_start ~= line_end then
+      lines = math.abs(line_start - line_end) + 1
+    elseif mode:match "v" then
+      chars = math.abs(col_start - col_end) + 1
+    end
+
+    if chars == 0 then
+      return string.format("%dL ", lines)
+    else
+      return string.format("%dL,%dC ", lines, chars)
+    end
+  end
+
+  return ""
+end
+
 local file = " %<%f %h%w%m%r "
-local ruler = " %{% &ruler ? ( &rulerformat == '' ? '%-14.(%l,%c%V%) %P' : &rulerformat ) : '' %} "
+local ruler =
+  " %{%v:lua.Selectioncount()%}%{% &ruler ? ( &rulerformat == '' ? '%-14.(%l,%c%V%) %P' : &rulerformat ) : '' %} "
 local git_branch = " 􀙡 %{fugitive#Head()} "
 local xcodebuild_test =
   "%#XcodebuildTestPlan#%{get(g:, 'xcodebuild_test_plan', '') != '' ? ' 􁁛  ' . get(g:, 'xcodebuild_test_plan', '') . ' ' : ''}%*"
