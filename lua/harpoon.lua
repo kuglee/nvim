@@ -87,6 +87,11 @@ local function open_slot(n)
     return
   end
 
+  local current_file = vim.api.nvim_buf_get_name(0)
+  if vim.fn.fnamemodify(entry.file, ":p") == vim.fn.fnamemodify(current_file, ":p") then
+    return
+  end
+
   vim.cmd.edit(vim.fn.fnameescape(entry.file))
 
   if entry.row and entry.col then
