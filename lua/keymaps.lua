@@ -63,8 +63,13 @@ vim.keymap.set("n", "p", "p`]")
 vim.keymap.set("n", "P", "P`]")
 
 -- visual paste without losing clipboard content
-vim.keymap.set("v", "p", '"zdP`]')
-vim.keymap.set("v", "P", '"zdP`]')
+local visual_paste = function()
+  vim.cmd 'normal! "zd'
+  vim.cmd "put!" -- using :put because it preserves trailing newlines
+end
+
+vim.keymap.set("v", "p", visual_paste)
+vim.keymap.set("v", "P", visual_paste)
 
 -- leader paste from "z register (original neovim behavior)
 vim.keymap.set("n", "<leader>p", '"zp`]')
