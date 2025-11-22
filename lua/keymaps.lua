@@ -71,6 +71,9 @@ end
 vim.keymap.set("v", "p", visual_paste)
 vim.keymap.set("v", "P", visual_paste)
 
+vim.keymap.set("v", "<leader>p", '"zp`]')
+vim.keymap.set("v", "<leader>P", '"zP`]')
+
 -- leader paste from "z register (original neovim behavior)
 vim.keymap.set("n", "<leader>p", '"zp`]')
 vim.keymap.set("n", "<leader>P", '"zP`]')
