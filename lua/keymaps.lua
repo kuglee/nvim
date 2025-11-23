@@ -64,8 +64,18 @@ vim.keymap.set("n", "P", "P`]")
 
 -- visual paste without losing clipboard content
 local visual_paste = function()
+  -- NOTE: this escapes visual mode
   vim.cmd 'normal! "zd'
-  vim.cmd "put!" -- using :put because it preserves trailing newlines
+
+  -- Get the last visual mode used
+  local mode = vim.fn.visualmode()
+  if mode == "V" then
+    -- Line-wise visual mode: use :put! to preserve newlines
+    vim.cmd "put!"
+  else
+    -- Character-wise visual mode: use normal P
+    vim.cmd "normal! P"
+  end
 end
 
 vim.keymap.set("v", "p", visual_paste)
