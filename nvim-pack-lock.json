@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "blink.cmp": {
-      "rev": "b19413d",
-      "src": "https://github.com/saghen/blink.cmp"
-    },
     "fidget.nvim": {
       "rev": "e32b672",
       "src": "https://github.com/j-hui/fidget.nvim"
