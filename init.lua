@@ -3,6 +3,7 @@ require "options"
 require "autocmd"
 require "breadcrumbs"
 require "completion"
+-- require "inline-diagnostic" -- DISABED: using tiny-inline-diagnostic for prettier inline diagnostics
 require "formatting"
 require "harpoon"
 require "statusline"
