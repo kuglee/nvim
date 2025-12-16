@@ -66,6 +66,7 @@ vim.opt.diffopt:append "algorithm:histogram"
 
 -- LSP activation (references lsp/<filename>)
 vim.lsp.enable {
+  "elmls",
   "luals",
   "sourcekit-lsp",
 }

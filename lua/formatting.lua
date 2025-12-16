@@ -83,6 +83,7 @@ local function setup_formatters(formatters)
 end
 
 setup_formatters {
+  elm = "elm-format --stdin",
   lua = "stylua -",
   swift = "swiftformat --stdinpath % --quiet",
   -- javascript = {
