@@ -68,7 +68,7 @@ local function find_symbol_path(symbol_list, line, char, path)
   end
 
   for _, symbol in ipairs(symbol_list) do
-    if range_contains_pos(symbol.range, line, char) then
+    if symbol.range and range_contains_pos(symbol.range, line, char) then
       local icon = get_colored_kind_icon(symbol.kind)
       local prefix = (icon and icon ~= "") and (icon .. " ") or ""
       table.insert(path, prefix .. symbol.name)
