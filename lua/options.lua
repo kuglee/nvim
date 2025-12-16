@@ -1,3 +1,6 @@
+-- disable mouse
+vim.o.mouse = ""
+
 -- split windows
 vim.opt.splitbelow = true -- horizontal split below current
 vim.opt.splitright = true -- vertical split to right of current
