@@ -7,6 +7,10 @@ require("mini.icons").setup()
 
 require("oil").setup {
   delete_to_trash = true,
+  columns = {},
+  lsp_file_methods = {
+    enabled = false,
+  },
   use_default_keymaps = false,
   keymaps = {
     ["g?"] = "actions.show_help",
