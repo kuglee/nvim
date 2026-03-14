@@ -135,7 +135,7 @@ local function lsp_callback(err, symbols, ctx)
 
   local breadcrumbs = {}
 
-  vim.list_extend(breadcrumbs, get_file_path_components(file_path))
+  -- vim.list_extend(breadcrumbs, get_file_path_components(file_path))
   vim.list_extend(breadcrumbs, get_symbol_path_at_position(symbols, cursor_line, cursor_char))
 
   local breadcrumb_string = table.concat(breadcrumbs, " > ")
