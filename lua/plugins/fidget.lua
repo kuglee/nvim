@@ -19,6 +19,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
           relative = "editor", -- What the notification window position is relative to
         },
       },
+
+      -- DEPRECATED; use notification.window.avoid = { "TestExplorer" }
+      integration = {
+        ["xcodebuild-nvim"] = {
+          enable = false,
+        },
+      },
     }
   end,
 })
