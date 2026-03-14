@@ -63,6 +63,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- better diffs
 vim.opt.diffopt:append "algorithm:histogram"
+vim.opt.diffopt:append "inline:char"
 
 -- LSP activation (references lsp/<filename>)
 vim.lsp.enable {
