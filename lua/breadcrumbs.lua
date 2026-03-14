@@ -1,8 +1,5 @@
 -- based on: https://github.com/juniorsundar/nvim/blob/ec45d4572e99769278e26dee76c0830d3f68f414/lua/config/lsp/breadcrumbs.lua
 
-local folder_icon = "%#Conditional#" .. "􀈖 " .. "%*"
-local file_icon = "%#None#" .. "􀉀 " .. "%*"
-
 local SymbolKind = vim.lsp.protocol.SymbolKind
 local kind_icons = {
   [SymbolKind.Array] = { color = "Operator", icon = "􀠩 " },
@@ -62,21 +59,29 @@ local function range_contains_pos(range, line, char)
   return true
 end
 
-local function find_symbol_path(symbol_list, line, char, path)
+local function get_symbol_path_at_position(symbol_list, line, char)
   if not symbol_list or #symbol_list == 0 then
-    return false
+    return {}
   end
 
   for _, symbol in ipairs(symbol_list) do
     if symbol.range and range_contains_pos(symbol.range, line, char) then
       local icon = get_colored_kind_icon(symbol.kind)
       local prefix = (icon and icon ~= "") and (icon .. " ") or ""
-      table.insert(path, prefix .. symbol.name)
-      find_symbol_path(symbol.children, line, char, path)
-      return true
+      local component = prefix .. symbol.name
+      local child_path = get_symbol_path_at_position(symbol.children, line, char)
+
+      if child_path then
+        table.insert(child_path, 1, component)
+
+        return child_path
+      else
+        return { component }
+      end
     end
   end
-  return false
+
+  return {}
 end
 
 local function get_relative_file_path(file_path)
@@ -89,6 +94,26 @@ local function get_relative_file_path(file_path)
   local relative_path = (ok and rel and rel ~= "") and rel or file_path
 
   return relative_path
+end
+
+local function get_file_path_components(file_path)
+  local folder_icon = "%#Conditional#" .. "􀈖 " .. "%*"
+  local file_icon = "%#None#" .. "􀉀 " .. "%*"
+  local stat = vim.loop.fs_stat(file_path)
+  local is_dir = stat and stat.type == "directory"
+  local relative_path = get_relative_file_path(file_path)
+  local path_components = vim.split(relative_path, "[/\\]", { trimempty = true })
+  local num_components = #path_components
+  local components = {}
+
+  for i, component in ipairs(path_components) do
+    local is_last = (i == num_components)
+    local icon = (is_last and not is_dir) and file_icon or folder_icon
+
+    table.insert(components, icon .. " " .. component)
+  end
+
+  return components
 end
 
 local function lsp_callback(err, symbols, ctx)
@@ -108,24 +133,10 @@ local function lsp_callback(err, symbols, ctx)
   local cursor_line = pos[1] - 1
   local cursor_char = pos[2]
 
-  local stat = vim.loop.fs_stat(file_path)
-  local is_dir = stat and stat.type == "directory"
-
-  local relative_path = get_relative_file_path(file_path)
-
   local breadcrumbs = {}
 
-  local path_components = vim.split(relative_path, "[/\\]", { trimempty = true })
-  local num_components = #path_components
-
-  for i, component in ipairs(path_components) do
-    local is_last = (i == num_components)
-    local icon = (is_last and not is_dir) and file_icon or folder_icon
-
-    table.insert(breadcrumbs, icon .. " " .. component)
-  end
-
-  find_symbol_path(symbols, cursor_line, cursor_char, breadcrumbs)
+  vim.list_extend(breadcrumbs, get_file_path_components(file_path))
+  vim.list_extend(breadcrumbs, get_symbol_path_at_position(symbols, cursor_line, cursor_char))
 
   local breadcrumb_string = table.concat(breadcrumbs, " > ")
 
