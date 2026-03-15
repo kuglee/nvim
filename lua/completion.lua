@@ -190,6 +190,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("TextChangedI", {
   pattern = "*",
   callback = function()
+    -- Only trigger if omnifunc is set
+    if vim.bo.omnifunc == "" then
+      return
+    end
+
     -- Only trigger in normal file buffers
     if vim.bo.buftype ~= "" then
       return
