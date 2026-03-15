@@ -185,3 +185,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
     enable_completion_documentation(client.name, autogroup, args.buf)
   end,
 })
+
+-- Trigger completion on insert
+vim.api.nvim_create_autocmd("TextChangedI", {
+  pattern = "*",
+  callback = function()
+    -- Only trigger in normal file buffers
+    if vim.bo.buftype ~= "" then
+      return
+    end
+
+    -- Get the text before cursor
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local before_cursor = line:sub(1, col)
+
+    -- Match the current word being typed
+    local word = before_cursor:match "[%w_]+$" or ""
+
+    -- Only trigger if word length >= 1 and menu not already visible
+    if #word >= 1 and vim.fn.pumvisible() == 0 then
+      vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true), "n")
+    end
+  end,
+})
