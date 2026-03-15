@@ -39,7 +39,13 @@ vim.api.nvim_create_autocmd("FileType", {
       return
     end
 
-    vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    local disable_ts_indent = {
+      elm = true,
+    }
+
+    if not disable_ts_indent[filetype] then
+      vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
 
     local win = vim.fn.bufwinid(event.buf)
     if win ~= -1 then
