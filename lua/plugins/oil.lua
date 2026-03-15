@@ -1,5 +1,5 @@
 vim.pack.add {
-  "https://github.com/stevearc/oil.nvim",
+  "https://github.com/barrettruth/canola.nvim",
   "https://github.com/nvim-mini/mini.icons",
 }
 
@@ -7,7 +7,13 @@ require("mini.icons").setup()
 
 require("oil").setup {
   delete_to_trash = true,
-  columns = {},
+  columns = {
+    "icon",
+    -- "permissions",
+    -- "size",
+    -- "mtime",
+  },
+  constrain_cursor = "name",
   lsp_file_methods = {
     enabled = false,
   },

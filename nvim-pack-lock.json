@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "canola.nvim": {
+      "rev": "b41a62ad1d87e9f795671851a29c848f91882bbd",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "fidget.nvim": {
       "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -40,10 +44,6 @@
     "nvim-web-devicons": {
       "rev": "d7462543c9e366c0d196c7f67a945eaaf5d99414",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
-    },
-    "oil.nvim": {
-      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
-      "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
       "rev": "b9fd522",
