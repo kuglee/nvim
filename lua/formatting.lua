@@ -19,8 +19,7 @@ local function format_buffer(buf)
   buf = buf or vim.api.nvim_get_current_buf()
   local formatprg = vim.bo[buf].formatprg
 
-  -- Save cursor and view
-  local cursor = vim.api.nvim_win_get_cursor(0)
+  -- Save view
   local view = vim.fn.winsaveview()
 
   if formatprg ~= "" then
@@ -42,9 +41,8 @@ local function format_buffer(buf)
     lsp_format(buf)
   end
 
-  -- Restore cursor and view
+  -- Restore view
   vim.fn.winrestview(view)
-  pcall(vim.api.nvim_win_set_cursor, 0, cursor)
 end
 
 local function setup_formatters(formatters)
