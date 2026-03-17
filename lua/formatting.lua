@@ -84,8 +84,8 @@ setup_formatters {
   elm = "elm-format --stdin",
   lua = "stylua -",
   swift = "swiftformat --stdinpath % --quiet",
-  -- javascript = {
-  --   cmd = "prettier --stdin-filepath %",
-  --   extensions = { "*.js", "*.jsx" }
-  -- },
+  javascript = {
+    cmd = "npx biome format --write %",
+    extensions = { "*.js", "*.jsx", "*.ts", "*.tsx" }
+  },
 }
