@@ -16,6 +16,15 @@
       "rev": "5b9076dae1bfbe47ba4a14bc8b967cde0ab5d77e",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
+    "neotest": {
+      "rev": "deadfb1af5ce458742671ad3a013acb9a6b41178",
+      "src": "https://github.com/nvim-neotest/neotest"
+    },
+    "neotest-playwright": {
+      "rev": "e6202f2b00dd5c3b7b626b147b86deb36c2d64bd",
+      "src": "https://github.com/stevanfreeborn/neotest-playwright",
+      "version": "'fork'"
+    },
     "nui.nvim": {
       "rev": "de74099",
       "src": "https://github.com/MunifTanjim/nui.nvim"
