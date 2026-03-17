@@ -41,7 +41,8 @@ vim.opt.clipboard:append "unnamedplus" -- use system clipboard as default regist
 vim.opt.swapfile = false -- no swap files
 vim.opt.backup = false -- no backup files
 vim.opt.writebackup = false -- nnly in case you don"t want a backup file while editing
-vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+vim.opt.undodir = home .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- appearance
@@ -70,4 +71,5 @@ vim.lsp.enable {
   "elmls",
   "luals",
   "sourcekit-lsp",
+  "tsls",
 }
