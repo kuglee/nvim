@@ -16,6 +16,10 @@
       "rev": "5b9076dae1bfbe47ba4a14bc8b967cde0ab5d77e",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
+    "neo-img": {
+      "rev": "065fa672929696c4f3478ff2fbdb886b5d2d434e",
+      "src": "https://github.com/Skardyy/neo-img"
+    },
     "neotest": {
       "rev": "deadfb1af5ce458742671ad3a013acb9a6b41178",
       "src": "https://github.com/nvim-neotest/neotest"
