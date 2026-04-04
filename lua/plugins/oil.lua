@@ -548,11 +548,7 @@ require("oil").setup {
   -- Id is automatically added at the beginning, and name at the end
   -- See :help oil-columns
   columns = {
-    "type",
     "icon",
-    "permissions",
-    "size",
-    "mtime",
   },
 
   -- Buffer-local options to use for oil buffers
@@ -576,33 +572,14 @@ require("oil").setup {
   -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
   delete_to_trash = true,
 
-  -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
-  skip_confirm_for_simple_edits = true,
-
-  -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
-  -- (:help prompt_save_on_select_new_entry)
-  prompt_save_on_select_new_entry = true,
-
   -- Oil will automatically delete hidden buffers after this delay
   -- You can set the delay to false to disable cleanup entirely
   -- Note that the cleanup process only starts when none of the oil buffers are currently displayed
   cleanup_delay_ms = 2000,
 
-  lsp_file_methods = {
-    -- Enable or disable LSP file operations
-    enabled = false,
-
-    -- Time to wait for LSP file operations to complete before skipping
-    timeout_ms = 1000,
-
-    -- Set to true to autosave buffers that are updated with LSP willRenameFiles
-    -- Set to "unmodified" to only save unmodified buffers
-    autosave_changes = false,
-  },
-
   -- Constrain the cursor to the editable parts of the oil buffer
   -- Set to `false` to disable, or "name" to keep it on the file names
-  constrain_cursor = "editable",
+  constrain_cursor = "name",
 
   -- Set to true to watch the filesystem for changes and reload oil
   watch_for_changes = true,
@@ -738,20 +715,6 @@ require("oil").setup {
 
   -- Extra arguments to pass to SCP when moving/copying files over SSH
   extra_scp_args = {},
-
-  -- EXPERIMENTAL support for performing file operations with git
-  git = {
-    -- Return true to automatically git add/mv/rm files
-    add = function(path)
-      return false
-    end,
-    mv = function(src_path, dest_path)
-      return false
-    end,
-    rm = function(path)
-      return false
-    end,
-  },
 
   -- Configuration for the floating window in oil.open_float
   float = {
