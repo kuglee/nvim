@@ -135,6 +135,48 @@ end
 ----------------------------------------------------------
 -- Keymaps
 ----------------------------------------------------------
+local oil = require "plugins.oil"
+local oil_ui = require "oil-ui"
+
+local original_open_slot = open_slot
+
+local function open_slot(n)
+  local entry = get_slots()[n]
+  if not entry or not entry.file then
+    original_open_slot(n)
+    return
+  end
+
+  -- Check if the file is an oil buffer
+  local is_oil = entry.file:match "^oil://"
+
+  if is_oil then
+    -- If we're in oil mode, close it first
+    if vim.g.is_oil_active then
+      oil_ui.close_oil_windows()
+    end
+
+    vim.schedule(function()
+      -- Extract the directory path from oil://
+      local oil_path = entry.file:gsub("^oil://", "")
+      local new_path = split_str(oil_path, "/")
+
+      oil_ui.open_oil_with_parent_and_preview {
+        window_path = new_path,
+      }
+    end)
+  else
+    -- Normal file, close oil if active then open
+    if vim.g.is_oil_active then
+      oil_ui.close_oil_windows()
+      vim.schedule(function()
+        original_open_slot(n)
+      end)
+    else
+      original_open_slot(n)
+    end
+  end
+end
 
 vim.keymap.set("n", "<leader>a", add_to_slots, { desc = "Add file to slots" })
 vim.keymap.set("n", "<leader>h", function()
