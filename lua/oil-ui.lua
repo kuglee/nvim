@@ -182,6 +182,8 @@ oil_ui.update_oil_win_numbers = function(current, parent, preview)
 end
 
 oil_ui.update_preview_window = function(current, preview)
+  vim.g.oil_updating_windows = true
+
   local oil = require "oil"
   --only update preview window if new path is different from last oil_state. If not, almost all behaviour of a default open_oil_with_parent_and_preview is nullified to save process time.
   if join(preview.window_path, "/") ~= join(vim.g.oil_state.preview.window_path, "/") then
@@ -209,6 +211,7 @@ oil_ui.update_preview_window = function(current, preview)
     end
   end
 
+  vim.g.oil_updating_windows = false
   return preview
 end
 
@@ -568,14 +571,68 @@ config.keymaps["-"] = {
   mode = "n",
 }
 
+-- Handle opening regular files while in oil mode
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    -- Only act if we're in oil mode
+    if not vim.g.is_oil_active then
+      return
+    end
+
+    -- Skip if oil is updating windows programmatically
+    if vim.g.oil_updating_windows then
+      return
+    end
+
+    local current_buf = vim.api.nvim_get_current_buf()
+    local buf_name = vim.api.nvim_buf_get_name(current_buf)
+
+    -- If entering a non-oil buffer, close oil mode
+    if buf_name ~= "" and not buf_name:match "^oil://" and not buf_name:match "^argslots://" then
+      vim.g.is_oil_active = false
+      vim.schedule(function()
+        oil_ui.close_oil_windows(buf_name)
+      end)
+    end
+  end,
+})
+
+-- Replace the existing BufEnter autocmd in oil-ui with this enhanced version:
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "oil://*",
   callback = function()
-    if not vim.g.is_oil_active then
-      vim.schedule(function()
+    vim.schedule(function()
+      local current_buf = vim.api.nvim_get_current_buf()
+      local oil_path = vim.api.nvim_buf_get_name(current_buf)
+
+      -- Only proceed if current buffer is actually an oil buffer
+      if not oil_path:match "^oil://" then
+        return
+      end
+
+      if not vim.g.is_oil_active then
+        -- Fresh oil open - use default behavior
         oil_ui.open_oil_with_parent_and_preview()
-      end)
-    end
+      else
+        -- Already in oil mode - navigate to the new oil:// path
+        local path_parts = filter(split_str(oil_path, "/"), function(el)
+          local startIndex, _ = string.find(el, "oil:")
+          if startIndex == nil then
+            return el
+          else
+            return nil
+          end
+        end)
+
+        if #path_parts == 0 then
+          path_parts = { "" }
+        end
+
+        oil_ui.open_oil_with_parent_and_preview {
+          window_path = path_parts,
+        }
+      end
+    end)
   end,
 })
 
