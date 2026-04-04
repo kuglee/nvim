@@ -812,3 +812,27 @@ require("oil").setup {
     border = "rounded",
   },
 }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "oil://*",
+  callback = function()
+    if not vim.g.is_oil_active then
+      vim.schedule(function()
+        oil_ui.open_oil_with_parent_and_preview()
+      end)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function()
+    vim.keymap.set("n", "<leader>q", function()
+      if vim.g.is_oil_active then
+        vim.cmd "qa"
+      end
+    end, { buffer = true, desc = "Quit window when in oil mode" })
+  end,
+})
+
+return oil_ui
