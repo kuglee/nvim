@@ -93,3 +93,21 @@ for _, op in ipairs { "x", "X", "d", "D", "c", "s" } do
   vim.keymap.set({ "n", "v" }, op, '"z' .. op)
 end
 vim.keymap.set("n", "dd", '"zdd') -- no dd in visual mode
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.keymap.set('n', '<leader>p', function()
+      local win = vim.api.nvim_get_current_win()
+      vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes('<CR>', true, false, true),
+        'n',
+        false
+      )
+      vim.schedule(function()
+        vim.api.nvim_set_current_win(win)
+      end)
+    end, { buffer = true, silent = true })
+  end,
+})
+
