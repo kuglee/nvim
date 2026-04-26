@@ -86,6 +86,6 @@ setup_formatters {
   swift = "swiftformat --stdinpath % --quiet",
   javascript = {
     cmd = "npx biome format --write %",
-    extensions = { "*.js", "*.jsx", "*.ts", "*.tsx" }
+    extensions = { "*.js", "*.jsx", "*.ts", "*.tsx" },
   },
 }
