@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
             { id = "console", size = 0.6 },
           },
           position = "bottom",
-          size = 10,
+          size = 20,
         },
       },
     }
