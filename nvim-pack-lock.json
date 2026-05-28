@@ -4,6 +4,10 @@
       "rev": "b41a62ad1d87e9f795671851a29c848f91882bbd",
       "src": "https://github.com/barrettruth/canola.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "fidget.nvim": {
       "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -19,6 +23,10 @@
     "neo-img": {
       "rev": "065fa672929696c4f3478ff2fbdb886b5d2d434e",
       "src": "https://github.com/Skardyy/neo-img"
+    },
+    "neogit": {
+      "rev": "792c139da736230855e8341ebe6175bb6eb8268b",
+      "src": "https://github.com/neogitorg/neogit"
     },
     "neotest": {
       "rev": "deadfb1af5ce458742671ad3a013acb9a6b41178",
@@ -83,7 +91,7 @@
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "xcodebuild.nvim": {
-      "rev": "6ee81bcf0334eac180111ac7ac2435d421d1508d",
+      "rev": "e6b57ce4855a41559e5ad402b9095d4ac4994e23",
       "src": "https://github.com/wojciech-kulik/xcodebuild.nvim"
     }
   }
