@@ -6,7 +6,11 @@ local function lsp_format(bufnr)
 
   for _, client in ipairs(clients) do
     if client:supports_method "textDocument/formatting" then
-      vim.lsp.buf.format { async = false, bufnr = bufnr }
+      vim.lsp.buf.format {
+        async = false,
+        bufnr = bufnr,
+        id = client.id,
+      }
 
       return true
     end
@@ -17,10 +21,9 @@ end
 
 local function format_buffer(buf)
   buf = buf or vim.api.nvim_get_current_buf()
-  local formatprg = vim.bo[buf].formatprg
 
-  -- Save view
   local view = vim.fn.winsaveview()
+  local formatprg = vim.bo[buf].formatprg
 
   if formatprg ~= "" then
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
@@ -28,20 +31,17 @@ local function format_buffer(buf)
     local filepath = vim.api.nvim_buf_get_name(buf)
     local cmd = formatprg:gsub("%%", filepath)
 
-    -- Run formatprg as a job
     local ok, result = pcall(vim.fn.systemlist, cmd, text)
+
     if ok and vim.v.shell_error == 0 and result then
       vim.api.nvim_buf_set_lines(buf, 0, -1, false, result)
     else
-      -- formatprg failed → fallback to LSP
       lsp_format(buf)
     end
   else
-    -- No formatprg → fallback to LSP
     lsp_format(buf)
   end
 
-  -- Restore view
   vim.fn.winrestview(view)
 end
 
@@ -58,16 +58,19 @@ local function setup_formatters(formatters)
       patterns = config.extensions or { "*." .. ft }
     end
 
-    -- Set formatprg on FileType
-    vim.api.nvim_create_autocmd("FileType", {
-      group = fmt_group,
-      pattern = ft,
-      callback = function()
-        vim.opt_local.formatprg = cmd
-      end,
-    })
+    -- Only set formatprg when an external formatter was configured.
+    -- An empty config (e.g. php = {}) means "use LSP".
+    if cmd then
+      vim.api.nvim_create_autocmd("FileType", {
+        group = fmt_group,
+        pattern = ft,
+        callback = function()
+          vim.opt_local.formatprg = cmd
+        end,
+      })
+    end
 
-    -- Format on save
+    -- Format on save.
     for _, pat in ipairs(patterns) do
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = fmt_group,
@@ -80,6 +83,7 @@ local function setup_formatters(formatters)
   end
 end
 
+-- Formatters
 setup_formatters {
   elm = "elm-format --stdin",
   lua = "stylua -",
