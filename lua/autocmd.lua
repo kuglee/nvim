@@ -32,6 +32,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 -- Add change positions to jumplist automatically
 vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    vim.cmd("normal! m'")
-  end
+    vim.cmd "normal! m'"
+  end,
 })
