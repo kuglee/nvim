@@ -93,6 +93,10 @@
     "xcodebuild.nvim": {
       "rev": "633eb71c0b354581837025581b7261dbe5361226",
       "src": "https://github.com/wojciech-kulik/xcodebuild.nvim"
+    },
+    "yazi.nvim": {
+      "rev": "d5f970a6c6b49cfbd7060b9dec100a094f0172dd",
+      "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
 }
