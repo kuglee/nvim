@@ -140,4 +140,7 @@ setup_formatters {
     cmd = "npx biome format --write %",
     extensions = { "*.js", "*.jsx", "*.ts", "*.tsx" },
   },
+
+  -- Uses PHPantom's LSP formatter
+  php = {},
 }
